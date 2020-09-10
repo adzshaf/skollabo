@@ -3,14 +3,15 @@ import "../../tailwind.output.css";
 
 const Navbar = () => {
   return (
-    <div className="max-w-md mx-auto flex p-6 bg-gray-100 mt-10 rounded-lg shadow-xl">
-      <div className="ml-6 pt-1">
-        <h1 className="text-2xl text-blue-700 leading-tight">
-          Tailwind and Create React App
-        </h1>
-        <p className="text-base text-gray-700 leading-normal">
-          Building apps together
-        </p>
+    <div className="bg-blue flex flex-row justify-between py-4 px-8">
+      <h1 className="text-3xl text-cream">Skollabo</h1>
+      <div>
+        <button className="text-blue bg-cream text-2xl rounded-full px-4 w-32">
+          sign up
+        </button>
+        <button className="text-cream bg-blue text-2xl rounded-full border-2 px-4 ml-4 w-32">
+          log in
+        </button>
       </div>
     </div>
   );
