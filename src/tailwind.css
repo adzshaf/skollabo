@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Ubuntu";
+    font-weight: 400;
+    src: url(./fonts/ubuntu-v15-latin-regular.woff) format("woff");
+  }
+  @font-face {
+    font-family: "Ubuntu";
+    font-weight: 700;
+    src: url(./fonts/ubuntu-v15-latin-700.woff) format("woff");
+  }
+  @font-face {
+    font-family: "Source Sans Pro";
+    font-weight: 400;
+    src: url(./fonts/source-sans-pro-v13-latin-regular.woff) format("woff");
+  }
+  @font-face {
+    font-family: "Source Sans Pro";
+    font-weight: 700;
+    src: url(./fonts/source-sans-pro-v13-latin-700.woff) format("woff");
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 700;
+  }
+
+  h5,
+  h6 {
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 400;
+  }
+
+  p {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+  }
+
+  b,
+  strong {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+  }
+}
