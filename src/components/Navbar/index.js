@@ -1,18 +1,21 @@
 import React from "react";
 import "../../tailwind.output.css";
 
-const Navbar = ({ onClickSignUp }) => {
+const Navbar = ({ onClickAuth }) => {
   return (
     <div className="bg-blue flex flex-row justify-between py-4 px-8">
       <h1 className="text-3xl text-cream">Skollabo</h1>
       <div>
         <button
           className="text-blue bg-cream text-2xl rounded-full px-4 w-32"
-          onClick={onClickSignUp}
+          onClick={() => onClickAuth("sign up")}
         >
           sign up
         </button>
-        <button className="text-cream bg-blue text-2xl rounded-full border-2 px-4 ml-4 w-32">
+        <button
+          className="text-cream bg-blue text-2xl rounded-full border-2 px-4 ml-4 w-32"
+          onClick={() => onClickAuth("login")}
+        >
           log in
         </button>
       </div>

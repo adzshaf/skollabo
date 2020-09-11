@@ -5,9 +5,9 @@ import background from "./background.png";
 import hero from "./asset-hero.png";
 import Button from "../Button";
 
-const LandingPage = ({ onClickSignUp }) => {
+const LandingPage = ({ onClickAuth }) => {
   return (
-    <Layout onClickSignUp={onClickSignUp}>
+    <Layout onClickAuth={onClickAuth}>
       <img
         className="w-screen background-hero"
         src={background}

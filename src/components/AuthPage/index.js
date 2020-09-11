@@ -4,6 +4,7 @@ import Button from "../Button";
 
 const AuthPage = ({ closePage, ...props }) => {
   const [roleSignUp, setRoleSignUp] = useState("");
+  const [mode, setMode] = useState(props.defaultAuth);
 
   return (
     <div className="bg-green w-screen h-screen flex justify-center items-center px-64">
@@ -16,10 +17,10 @@ const AuthPage = ({ closePage, ...props }) => {
         />
         <div className="text-3xl">
           <h1 className="text-center">
-            {roleSignUp == "" ? "Welcome to Skollabo" : roleSignUp}
+            {roleSignUp === "" ? "Welcome to Skollabo" : roleSignUp}
           </h1>
         </div>
-        {roleSignUp !== "" && (
+        {roleSignUp === "" && (
           <div className="flex flex-row justify-center items-center pt-12">
             <div
               className="bg-blue w-48 h-48 flex justify-center items-center mr-8 rounded-lg cursor-pointer"
@@ -35,17 +36,29 @@ const AuthPage = ({ closePage, ...props }) => {
             </div>
           </div>
         )}
-        {roleSignUp === "" && (
+        {roleSignUp !== "" && (
           <div>
             <div className="flex flex-row justify-between">
-              <h2 className="text-2xl cursor-pointer">login</h2>
-              <h2 className="text-2xl cursor-pointer">signup</h2>
+              <h2
+                className="text-2xl cursor-pointer"
+                onClick={() => setMode("login")}
+              >
+                login
+              </h2>
+              <h2
+                className="text-2xl cursor-pointer"
+                onClick={() => setMode("sign up")}
+              >
+                signup
+              </h2>
             </div>
             <div className="flex flex-col mt-8">
-              <input
-                className="py-2 px-4 border-b border-opacity-25 focus:none mb-2 border-grey"
-                placeholder="Your Name"
-              />
+              {mode === "sign up" && (
+                <input
+                  className="py-2 px-4 border-b border-opacity-25 focus:none mb-2 border-grey"
+                  placeholder="Your Name"
+                />
+              )}
               <input
                 className="py-2 px-4 border-b border-opacity-25 focus:none mb-2 border-grey"
                 placeholder="Email address"
@@ -58,11 +71,13 @@ const AuthPage = ({ closePage, ...props }) => {
               />
               <div className="flex flex-col items-center">
                 <Button className="text-white text-2xl p-2 bg-blue-cornflower mt-4 w-64 mb-4">
-                  Create Account
+                  {mode === "sign up" && "Create Account"}
+                  {mode === "login" && "Log in"}
                 </Button>
                 <p className="text-center text-grey">
-                  By continuing to use our service, you accept our Terms of
-                  Service and Privacy Policy
+                  {mode === "sign up" &&
+                    "By continuing to use our service, you accept our Terms of Service and Privacy Policy"}
+                  {mode === "login" && "Forgot Password?"}
                 </p>
               </div>
             </div>

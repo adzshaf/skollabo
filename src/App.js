@@ -4,14 +4,22 @@ import LandingPage from "./components/LandingPage";
 import AuthPage from "./components/AuthPage";
 
 const App = () => {
-  const [signUpPage, setSignUpPage] = useState(false);
+  const [authPage, setAuthPage] = useState(false);
+  const [defaultAuth, setDefaultAuth] = useState("");
+  const moveToAuth = (route) => {
+    setDefaultAuth(route);
+    setAuthPage(true);
+  };
 
   return (
     <div>
-      {signUpPage ? (
-        <AuthPage closePage={() => setSignUpPage(false)} />
+      {authPage ? (
+        <AuthPage
+          closePage={() => setAuthPage(false)}
+          defaultAuth={defaultAuth}
+        />
       ) : (
-        <LandingPage onClickSignUp={() => setSignUpPage(true)} />
+        <LandingPage onClickAuth={moveToAuth} />
       )}
     </div>
   );
