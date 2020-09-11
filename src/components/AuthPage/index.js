@@ -2,24 +2,21 @@ import React, { useState } from "react";
 import { useIdentityContext } from "react-netlify-identity";
 import close from "./close-round-grey.svg";
 import Button from "../Button";
-import { navigate } from "@reach/router";
 
 const AuthPage = ({ closePage, ...props }) => {
   const [roleSignUp, setRoleSignUp] = useState("");
   const [mode, setMode] = useState(props.defaultAuth);
   const { signupUser } = useIdentityContext();
-  const formRef = React.useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
+  console.log(name);
 
   const signup = () => {
-    if (!formRef.current) return;
-    // const full_name = formRef.current.username.value;
-    const email = formRef.current.email.value;
-    const password = formRef.current.password.value;
-    // const data = { roles: roleSignUp, full_name };
-    signupUser(email, password)
+    signupUser(email, password, {}, false)
       .then((user) => {
         console.log("Success! Signed up", user);
-        navigate("/");
       })
       .catch(
         (err) => void console.error(err) || console.log("Error: " + err.message)
@@ -73,41 +70,42 @@ const AuthPage = ({ closePage, ...props }) => {
               </h2>
             </div>
             <div className="flex flex-col mt-8">
-              <form ref={formRef} onSubmit={() => signup()}>
-                {mode === "sign up" && (
-                  <input
-                    className="py-2 px-4 border-b border-opacity-25 focus:none mb-2 border-grey w-full"
-                    placeholder="Your Name"
-                    name="username"
-                  />
-                )}
+              {mode === "sign up" && (
                 <input
                   className="py-2 px-4 border-b border-opacity-25 focus:none mb-2 border-grey w-full"
-                  placeholder="Email address"
-                  type="email"
-                  name="email"
+                  placeholder="Your Name"
+                  name="username"
+                  onChange={(e) => setName(e.target.value)}
                 />
-                <input
-                  className="py-2 px-4 border-b border-opacity-25 focus:none mb-2 border-grey w-full"
-                  placeholder="Password"
-                  type="password"
-                  name="password"
-                />
-                <div className="flex flex-col items-center">
-                  <Button
-                    className="text-white text-2xl p-2 bg-blue-cornflower mt-4 w-64 mb-4"
-                    type="submit"
-                  >
-                    {mode === "sign up" && "Create Account"}
-                    {mode === "login" && "Log in"}
-                  </Button>
-                  <p className="text-center text-grey">
-                    {mode === "sign up" &&
-                      "By continuing to use our service, you accept our Terms of Service and Privacy Policy"}
-                    {mode === "login" && "Forgot Password?"}
-                  </p>
-                </div>
-              </form>
+              )}
+              <input
+                className="py-2 px-4 border-b border-opacity-25 focus:none mb-2 border-grey w-full"
+                placeholder="Email address"
+                type="email"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                className="py-2 px-4 border-b border-opacity-25 focus:none mb-2 border-grey w-full"
+                placeholder="Password"
+                type="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div className="flex flex-col items-center">
+                <Button
+                  className="text-white text-2xl p-2 bg-blue-cornflower mt-4 w-64 mb-4"
+                  onClick={signup}
+                >
+                  {mode === "sign up" && "Create Account"}
+                  {mode === "login" && "Log in"}
+                </Button>
+                <p className="text-center text-grey">
+                  {mode === "sign up" &&
+                    "By continuing to use our service, you accept our Terms of Service and Privacy Policy"}
+                  {mode === "login" && "Forgot Password?"}
+                </p>
+              </div>
             </div>
           </div>
         )}
