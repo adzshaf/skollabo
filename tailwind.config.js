@@ -32,6 +32,7 @@ module.exports = {
       },
       brick: "#A15842",
       cream: "#F5EBDD",
+      white: "#FFFFFF",
     },
     extend: {},
   },

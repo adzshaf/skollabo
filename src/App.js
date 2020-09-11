@@ -1,7 +1,7 @@
 import React from "react";
 import "./tailwind.output.css";
-import Layout from "./components/Layout";
+import LandingPage from "./components/LandingPage";
 
-const App = () => <Layout />;
+const App = () => <LandingPage />;
 
 export default App;
