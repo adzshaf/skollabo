@@ -1,10 +1,10 @@
 import React from "react";
 import Navbar from "../Navbar";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, ...props }) => {
   return (
     <div className="h-screen">
-      <Navbar />
+      <Navbar {...props} />
       {children}
     </div>
   );
