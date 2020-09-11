@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useIdentityContext } from "react-netlify-identity";
 import close from "./close-round-grey.svg";
 import Button from "../Button";
-import { navigate } from "@reach/router";
 
 const AuthPage = ({ closePage, ...props }) => {
   const [roleSignUp, setRoleSignUp] = useState("");
@@ -11,6 +10,8 @@ const AuthPage = ({ closePage, ...props }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+
+  console.log(name);
 
   const signup = () => {
     signupUser(email, password, {}, false)
