@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, useIdentityContext } from "react-netlify-identity";
+import { useIdentityContext } from "react-netlify-identity";
 import close from "./close-round-grey.svg";
 import Button from "../Button";
 
