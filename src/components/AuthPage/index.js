@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useIdentityContext } from "react-netlify-identity";
 import close from "./close-round-grey.svg";
 import Button from "../Button";
+import { navigate } from "@reach/router";
 
 const AuthPage = ({ closePage, ...props }) => {
   const [roleSignUp, setRoleSignUp] = useState("");
@@ -15,13 +16,10 @@ const AuthPage = ({ closePage, ...props }) => {
     const email = formRef.current.email.value;
     const password = formRef.current.password.value;
     // const data = { roles: roleSignUp, full_name };
-    signupUser(email, password, {}, true)
+    signupUser(email, password)
       .then((user) => {
-        if (process.env.NODE_ENV !== "production")
-          console.log("Success! Signed up", user);
-        else {
-          console.log("success!", user);
-        }
+        console.log("Success! Signed up", user);
+        navigate("/");
       })
       .catch(
         (err) => void console.error(err) || console.log("Error: " + err.message)
