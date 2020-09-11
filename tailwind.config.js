@@ -34,7 +34,20 @@ module.exports = {
       cream: "#F5EBDD",
       white: "#FFFFFF",
     },
-    extend: {},
+    extend: {
+      padding: {
+        96: "24rem",
+        128: "32rem",
+      },
+      height: {
+        96: "24rem",
+        128: "32rem",
+      },
+      width: {
+        96: "24rem",
+        128: "32rem",
+      },
+    },
   },
   variants: {},
   plugins: [],
