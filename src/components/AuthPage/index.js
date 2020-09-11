@@ -11,14 +11,17 @@ const AuthPage = ({ closePage, ...props }) => {
 
   const signup = () => {
     if (!formRef.current) return;
-    const full_name = formRef.current.username.value;
+    // const full_name = formRef.current.username.value;
     const email = formRef.current.email.value;
     const password = formRef.current.password.value;
-    const data = { roles: roleSignUp, full_name };
-    signupUser(email, password, data, true)
+    // const data = { roles: roleSignUp, full_name };
+    signupUser(email, password, {}, true)
       .then((user) => {
         if (process.env.NODE_ENV !== "production")
           console.log("Success! Signed up", user);
+        else {
+          console.log("success!", user);
+        }
       })
       .catch(
         (err) => void console.error(err) || console.log("Error: " + err.message)
