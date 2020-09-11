@@ -33,18 +33,22 @@ module.exports = {
       brick: "#A15842",
       cream: "#F5EBDD",
       white: "#FFFFFF",
+      grey: "#A3A3A3",
     },
     extend: {
       padding: {
         96: "24rem",
+        112: "28rem",
         128: "32rem",
       },
       height: {
         96: "24rem",
+        112: "28rem",
         128: "32rem",
       },
       width: {
         96: "24rem",
+        112: "28rem",
         128: "32rem",
       },
     },
