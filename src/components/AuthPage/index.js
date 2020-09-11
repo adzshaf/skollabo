@@ -11,10 +11,8 @@ const AuthPage = ({ closePage, ...props }) => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  console.log(name);
-
   const signup = () => {
-    signupUser(email, password, {}, false)
+    signupUser(email, password, { full_name: name }, false)
       .then((user) => {
         console.log("Success! Signed up", user);
       })
