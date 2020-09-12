@@ -1,24 +1,51 @@
 import React, { useState } from "react";
-import { useIdentityContext } from "react-netlify-identity";
 import close from "./close-round-grey.svg";
 import Button from "../Button";
+import axios from "axios";
 
 const AuthPage = ({ closePage, ...props }) => {
   const [roleSignUp, setRoleSignUp] = useState("");
   const [mode, setMode] = useState(props.defaultAuth);
-  const { signupUser } = useIdentityContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
   const signup = () => {
-    signupUser(email, password, { full_name: name }, false)
-      .then((user) => {
-        console.log("Success! Signed up", user);
+    axios
+      .post("http://localhost:1337/auth/local/register", {
+        username: name,
+        email: email,
+        password: password,
       })
-      .catch(
-        (err) => void console.error(err) || console.log("Error: " + err.message)
-      );
+      .then((response) => {
+        console.log("User profile", response.data.user);
+        console.log("User token", response.data.jwt);
+        let responseData = response.data;
+        localStorage.setItem("user", JSON.stringify(responseData));
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error.response);
+      });
+
+    if (localStorage.getItem("user") !== "null" && roleSignUp === "Student") {
+      axios
+        .post("http://localhost:1337/update-role", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${
+              JSON.parse(localStorage.getItem("user")).jwt
+            }`,
+          },
+          user_id: JSON.parse(localStorage.getItem("user")).user.id,
+          role_id: 2,
+        })
+        .then((response) => {
+          console.log("response", response);
+        })
+        .catch((error) => {
+          console.log("An error occurred:", error.response);
+        });
+    }
   };
 
   return (
@@ -39,13 +66,13 @@ const AuthPage = ({ closePage, ...props }) => {
           <div className="flex flex-row justify-center items-center pt-12">
             <div
               className="bg-blue w-48 h-48 flex justify-center items-center mr-8 rounded-lg cursor-pointer"
-              onClick={() => setRoleSignUp("teacher")}
+              onClick={() => setRoleSignUp("Teacher")}
             >
               <h2 className="text-white text-xl">teacher</h2>
             </div>
             <div
               className="bg-blue-bright w-48 h-48 flex justify-center items-center rounded-lg cursor-pointer"
-              onClick={() => setRoleSignUp("student")}
+              onClick={() => setRoleSignUp("Student")}
             >
               <h2 className="text-white text-xl">student</h2>
             </div>
